@@ -40,7 +40,9 @@ jobs:
           YAML
           cat "$HOME/t3rm-test/shared.yaml"
       - name: 計画を表示する（リンク、lifecycle あり）
+        if: always()
         run: |
+          set +e
           ln -sf "$HOME/t3rm-test/shared.yaml" "$HOME/.sbxenv.yaml"
           ls -l "$HOME/.sbxenv.yaml"
           cd "$HOME/t3rm-test/project"
@@ -49,7 +51,9 @@ jobs:
           body=$(sed -e 's/%/%25/g' /tmp/plan-link.txt | awk '{printf "%s%%0A", $0}')
           echo "::notice title=plan symlink::${body}"
       - name: 計画を表示する（通常のファイル、比較用）
+        if: always()
         run: |
+          set +e
           rm -f "$HOME/.sbxenv.yaml"
           cp "$HOME/t3rm-test/shared.yaml" "$HOME/.sbxenv.yaml"
           cd "$HOME/t3rm-test/project"
