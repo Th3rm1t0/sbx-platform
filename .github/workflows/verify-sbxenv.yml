@@ -1,0 +1,59 @@
+# 検証用: ~/.sbxenv.yaml をリンクにしたときと、lifecycle を書いたときの sbx の振る舞いを確かめる
+# このブランチへの push でだけ動く。main にはマージしない。
+name: verify-sbxenv
+on:
+  push:
+    branches: [verify/sbxenv-defaults]
+permissions:
+  contents: read
+jobs:
+  verify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: KVM と OS の確認
+        run: |
+          uname -a
+          ls -l /dev/kvm || true
+          echo "::notice title=kvm::$(ls -l /dev/kvm 2>&1)"
+      - name: sbx を入れる
+        run: |
+          curl -fsSL https://get.docker.com -o get-docker.sh
+          sudo REPO_ONLY=1 sh get-docker.sh
+          sudo apt-get install -y docker-sbx
+          sudo usermod -aG kvm "$USER" || true
+          sbx version 2>&1 | tee /tmp/version.txt || true
+          echo "::notice title=sbx version::$(tr '\n' ' ' < /tmp/version.txt)"
+      - name: 試験用のファイルを作る
+        run: |
+          mkdir -p "$HOME/t3rm-test/project"
+          cat > "$HOME/t3rm-test/shared.yaml" <<'YAML'
+          schemaVersion: "1"
+          agent: claude
+          workspace: ${{ '${{' }} env.projectDir }}
+          env:
+            T3RM_TEST: "1"
+          lifecycle:
+            initialize:
+              - name: t3rm test
+                command: echo t3rm-initialize
+          YAML
+          cat "$HOME/t3rm-test/shared.yaml"
+      - name: 計画を表示する（リンク、lifecycle あり）
+        run: |
+          ln -sf "$HOME/t3rm-test/shared.yaml" "$HOME/.sbxenv.yaml"
+          ls -l "$HOME/.sbxenv.yaml"
+          cd "$HOME/t3rm-test/project"
+          sg kvm -c "timeout 120 sbx env plan" > /tmp/plan-link.txt 2>&1; echo "exit=$?" >> /tmp/plan-link.txt
+          cat /tmp/plan-link.txt
+          body=$(sed -e 's/%/%25/g' /tmp/plan-link.txt | awk '{printf "%s%%0A", $0}')
+          echo "::notice title=plan symlink::${body}"
+      - name: 計画を表示する（通常のファイル、比較用）
+        run: |
+          rm -f "$HOME/.sbxenv.yaml"
+          cp "$HOME/t3rm-test/shared.yaml" "$HOME/.sbxenv.yaml"
+          cd "$HOME/t3rm-test/project"
+          sg kvm -c "timeout 120 sbx env plan" > /tmp/plan-file.txt 2>&1; echo "exit=$?" >> /tmp/plan-file.txt
+          cat /tmp/plan-file.txt
+          body=$(sed -e 's/%/%25/g' /tmp/plan-file.txt | awk '{printf "%s%%0A", $0}')
+          echo "::notice title=plan regular file::${body}"
