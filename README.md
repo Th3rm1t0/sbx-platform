@@ -8,7 +8,7 @@ Docker Sandboxes で使う共通定義（skills・指示文・ネットワーク
 
 | 置き場所 | 中身 |
 |---|---|
-| `skills/` | 配布する skills。`manifest.yaml` が唯一の正 |
+| `skills/` | 配布する skills。1つの skill が1つのディレクトリで完結する |
 | `kits/` | v3 の mixin kit（base、team） |
 | `sets/` | workload と mixin を束ねる kit set |
 | `env/` | メンバーの `~/.sbxenv.yaml` の元になる base の env |
@@ -18,7 +18,7 @@ Docker Sandboxes で使う共通定義（skills・指示文・ネットワーク
 ## サイクル
 
 1. Issue（または Slack から）で skill の追加を依頼する
-2. Claude が manifest と写しを更新した PR を作る
+2. Claude が skill のディレクトリ（意図と写し）を足した PR を作る
 3. 週1回、外部 skills の上流を確かめ、更新があれば PR を作る
 4. 検査を通り危険度が低ければ自動マージ、そうでなければ保留して Slack に通知する
 5. main に入ると kit と kit set をビルドして GHCR に push、署名し、`stable` を動かす
@@ -30,7 +30,8 @@ Docker Sandboxes で使う共通定義（skills・指示文・ネットワーク
 
 ## 状態
 
-- [ ] skills の manifest の項目
+- [x] skills の管理の形（`skills/README.md`）
+- [ ] skill.yaml と skill.lock.yaml の項目
 - [ ] 取り込みスクリプト
 - [ ] 危険度の判定ルール
 - [ ] kit（base、team）の記述子

@@ -1,6 +1,6 @@
 # kits
 
-v3 の mixin kit を置く。各 kit は記述子（YAML）と Dockerfile の組でできている。skills の同梱設定は `skills/manifest.yaml` から生成するので、ここに手で書かない。
+v3 の mixin kit を置く。各 kit は記述子（YAML）と Dockerfile の組でできている。skills の同梱設定は 各 skill の `skill.yaml` から生成するので、ここに手で書かない。
 
 | kit | 中身 |
 |---|---|
