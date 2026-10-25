@@ -1,0 +1,16 @@
+# 依頼: Issue の @claude から manifest と写しを更新した PR を作る
+# 雛形の段階なので、手動実行のときだけ動く。
+name: request
+on:
+  workflow_dispatch:
+  # issues:
+  #   types: [opened]
+  # issue_comment:
+  #   types: [created]
+permissions:
+  contents: read
+jobs:
+  request:
+    runs-on: ubuntu-latest
+    steps:
+      - run: 'echo "TODO: Claude Code GitHub Actions で PR を作る"'

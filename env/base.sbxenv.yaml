@@ -1,0 +1,8 @@
+# メンバーの ~/.sbxenv.yaml の元。中身はこれから詰める。
+# 想定している項目:
+#   agent / kits:   standard の stable を参照する
+#   workspace:      コマンドを実行したディレクトリ
+#   mcp.servers:    全プロジェクト共通の MCP サーバー
+#   registries:     ghcr.io を gh auth token で認証する
+#   sandboxOptions: skills ストアは読み取り専用、既定の CPU とメモリ
+schemaVersion: "1"

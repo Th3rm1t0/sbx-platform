@@ -1,0 +1,25 @@
+# 検査: 整合性・危険度・AI レビュー・ビルド確認をして、自動マージか保留かを決める
+# 雛形の段階なので、手動実行のときだけ動く。
+name: check
+on:
+  workflow_dispatch:
+  # pull_request:
+permissions:
+  contents: read
+jobs:
+  integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - run: 'echo "TODO: ハッシュ・名前の重複・ライセンス"'
+  risk:
+    runs-on: ubuntu-latest
+    steps:
+      - run: 'echo "TODO: 危険度の判定"'
+  ai-review:
+    runs-on: ubuntu-latest
+    steps:
+      - run: 'echo "TODO: Claude による差分のレビュー"'
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: 'echo "TODO: kit と kit set を push せずにビルド"'

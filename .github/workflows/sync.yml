@@ -1,0 +1,14 @@
+# 同期: 外部 skills の上流を確かめ、更新があれば skill ごとに PR を作る
+# 雛形の段階なので、手動実行のときだけ動く。
+name: sync
+on:
+  workflow_dispatch:
+  # schedule:
+  #   - cron: "0 0 * * 1"
+permissions:
+  contents: read
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - run: 'echo "TODO: 取り込みスクリプトで上流を確かめる"'

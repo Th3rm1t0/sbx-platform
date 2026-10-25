@@ -1,0 +1,14 @@
+# 掃除: 古い保留を閉じ、古いイメージを消し、週の要約を Slack に送る
+# 雛形の段階なので、手動実行のときだけ動く。
+name: housekeeping
+on:
+  workflow_dispatch:
+  # schedule:
+  #   - cron: "0 0 * * 1"
+permissions:
+  contents: read
+jobs:
+  housekeeping:
+    runs-on: ubuntu-latest
+    steps:
+      - run: 'echo "TODO: 保留の自動クローズ・イメージの掃除・週の要約"'

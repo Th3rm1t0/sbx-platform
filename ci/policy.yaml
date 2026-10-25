@@ -1,0 +1,6 @@
+# CI の方針。値はこれから決める。
+trusted_sources: []      # 自動マージを許す取得元（GitHub の組織名）
+license_allowlist: []    # 取り込みを許すライセンス
+risk:
+  high_when: []          # 危険度を「高」にする条件
+hold_expiry_days: null   # 保留を自動で閉じるまでの日数

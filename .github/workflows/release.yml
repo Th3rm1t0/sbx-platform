@@ -1,0 +1,14 @@
+# リリース: kit と kit set をビルドして GHCR に push、署名し、stable を動かす
+# 雛形の段階なので、手動実行のときだけ動く。
+name: release
+on:
+  workflow_dispatch:
+  # push:
+  #   branches: [main]
+permissions:
+  contents: read
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - run: 'echo "TODO: ビルド・push・署名・stable 更新"'

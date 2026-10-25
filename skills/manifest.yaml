@@ -1,0 +1,10 @@
+# 配布する skills の一覧（唯一の正）
+# 項目は今後詰める。現時点の想定:
+#   name:    skill の名前（自作は接頭辞つき、外部は上流の名前のまま）
+#   type:    internal | external
+#   source:  取得元のリポジトリとパス（external のみ）
+#   ref:     固定するコミット SHA（external のみ）
+#   hash:    中身のハッシュ（CI が記録・検証する）
+#   license: ライセンス
+#   kit:     同梱する kit（base | team）
+skills: []
