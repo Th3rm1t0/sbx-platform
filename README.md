@@ -31,7 +31,7 @@ Docker Sandboxes で使う共通定義（skills・指示文・ネットワーク
 ## 状態
 
 - [x] skills の管理の形（`skills/README.md`）
-- [ ] skill.yaml と skill.lock.yaml の項目
+- [x] skill.yaml と skill.lock.yaml の項目
 - [ ] 取り込みスクリプト
 - [ ] 危険度の判定ルール
 - [ ] kit（base、team）の記述子
